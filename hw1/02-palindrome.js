@@ -4,26 +4,31 @@ const reslut = document.querySelector("#result");
 inputNumber.addEventListener("input", (event) => {
   const { value } = event.target;
 
-  if (value < 0) {
-    updateResultMessage("Error: Please enter a positive number.", "red");
-  } else if (!value.trim() || isNaN(value)) {
+  if (!value.trim() || isNaN(value)) {
     updateResultMessage("Error: Please enter a valid number.", "red");
-  } else {
-    const isPalindrome = checkPalindrome(value);
+    return;
+  }
 
-    if (isPalindrome) {
-      updateResultMessage("Yes, This is a palindrome.", "green");
-    } else {
-      updateResultMessage("No, Try again.", "red");
-    }
+  const numberValue = parseInt(value);
+
+  if (numberValue < 0) {
+    updateResultMessage("Error: Please enter a positive number.", "red");
+    return;
+  }
+
+  const isPalindrome = checkPalindrome(value);
+
+  if (isPalindrome) {
+    updateResultMessage("Yes, This is a palindrome.", "green");
+  } else {
+    updateResultMessage("No, Try again.", "red");
   }
 });
 
 const checkPalindrome = (number) => {
-  const numberString = number.toString();
-  const reversedNumberString = numberString.split("").reverse().join("");
+  const reversedNumber = number.split("").reverse().join("");
 
-  return numberString === reversedNumberString;
+  return number === reversedNumber;
 };
 
 const updateResultMessage = (message, color) => {

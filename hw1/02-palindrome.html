@@ -6,20 +6,26 @@
     <title>02 - Palindrome</title>
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    />
     <script defer src="02-palindrome.js"></script>
   </head>
-  <body>
+  <body class="bg-primary d-flex justify-content-center pt-5">
     <main>
-      <section>
+      <section class="container p-4 bg-light rounded">
         <h1>Exercise 02 - Palindrome</h1>
-        <div>
-          <label>Enter a positive number:</label>
-          <input type="number" />
+        <div class="mt-5 row">
+          <div class="col-auto">
+            <label for="input-number">Enter a positive number:</label>
+          </div>
+          <div class="col-auto">
+            <input class="form-control" id="input-number" type="number" />
+          </div>
         </div>
+
         <div>
-          <p>Is this a palindrome?</p>
-          <div></div>
+          <p class="mt-4">Is this a palindrome?</p>
+          <div id="result"></div>
         </div>
       </section>
     </main>

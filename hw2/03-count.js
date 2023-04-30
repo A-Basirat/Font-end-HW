@@ -1,38 +1,42 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const input = document.querySelector("input");
-  const textDiv = document.querySelector(".text-container");
+const input = document.querySelector("input");
+const textDiv = document.querySelector(".text-container");
+const originalText = textDiv.textContent;
 
-  const highlightWord = (word) => {
-    const originalText = textDiv.textContent;
-    const words = originalText.split(/\s+/);
-    const fragment = new DocumentFragment();
+const highlightWord = (word) => {
+  const originalText = textDiv.textContent;
+  const words = originalText.split(/\s+/);
+  const fragment = new DocumentFragment();
+  const lowerCaseWord = word.toLowerCase();
 
-    words.forEach((currentWord, index) => {
-      if (currentWord.toLowerCase() === word.toLowerCase()) {
-        const mark = document.createElement("mark");
-        mark.textContent = currentWord;
-        fragment.appendChild(mark);
-      } else {
-        fragment.appendChild(document.createTextNode(currentWord));
-      }
+  words.forEach((currentWord, index) => {
+    let textToAdd;
 
-      if (index < words.length - 1) {
-        fragment.appendChild(document.createTextNode(" "));
-      }
-    });
-
-    textDiv.textContent = "";
-    textDiv.appendChild(fragment);
-  };
-
-  const handleKeyDown = ({ target: { value } }) => {
-    const word = value.trim();
-    if (word) {
-      highlightWord(word);
+    if (currentWord.toLowerCase() === lowerCaseWord) {
+      const mark = document.createElement("mark");
+      mark.textContent = currentWord;
+      textToAdd = mark;
     } else {
-      textDiv.textContent = textDiv.textContent;
+      textToAdd = document.createTextNode(currentWord);
     }
-  };
 
-  input.addEventListener("keydown", handleKeyDown);
-});
+    fragment.appendChild(textToAdd);
+
+    if (index < words.length - 1) {
+      fragment.appendChild(document.createTextNode(" "));
+    }
+  });
+
+  textDiv.textContent = "";
+  textDiv.appendChild(fragment);
+};
+
+const handleKeyDown = ({ target: { value } }) => {
+  const word = value.trim();
+  if (word) {
+    highlightWord(word);
+  } else {
+    textDiv.textContent = originalText;
+  }
+};
+
+input.addEventListener("keydown", handleKeyDown);

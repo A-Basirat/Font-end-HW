@@ -16,23 +16,15 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.backgroundColor = getRandomColor();
   };
 
-  const startColorChange = (interval) => {
-    intervalId = setInterval(changeBackgroundColor, interval * 1000);
-  };
-
-  const stopColorChange = () => {
-    clearInterval(intervalId);
-  };
-
   const toggleColorChange = () => {
     if (isRunning) {
-      stopColorChange();
+      clearInterval(intervalId);
       startStopButton.textContent = "Start";
       startStopButton.classList.remove("btn-danger");
       startStopButton.classList.add("btn-primary");
     } else {
       const interval = parseInt(intervalInput.value.trim(), 10) || 3;
-      startColorChange(interval);
+      intervalId = setInterval(changeBackgroundColor, interval * 1000);
       startStopButton.textContent = "Stop";
       startStopButton.classList.remove("btn-primary");
       startStopButton.classList.add("btn-danger");

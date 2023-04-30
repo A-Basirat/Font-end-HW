@@ -4,17 +4,24 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const fullName = form.querySelector("#full-name").value;
-    const email = form.querySelector("#email").value;
-    const registrationStatus = form.querySelector("#registration-status").value;
-    const programmingLanguages = form.querySelector(
-      "#programming-languages"
-    ).checked;
-    const operatingSystems = form.querySelector("#operating-systems").checked;
-    const fullStackWebDevelopment = form.querySelector(
-      "#full-stack-web-development"
-    ).checked;
-    const comments = form.querySelector("#comments").value;
+    const getInputValue = (id, type = "value") => {
+      const element = form.querySelector(id);
+      return type === "checked" ? element.checked : element.value;
+    };
+
+    const fullName = getInputValue("#full-name");
+    const email = getInputValue("#email");
+    const registrationStatus = getInputValue("#registration-status");
+    const programmingLanguages = getInputValue(
+      "#programming-languages",
+      "checked"
+    );
+    const operatingSystems = getInputValue("#operating-systems", "checked");
+    const fullStackWebDevelopment = getInputValue(
+      "#full-stack-web-development",
+      "checked"
+    );
+    const comments = getInputValue("#comments");
 
     console.log({
       fullName,

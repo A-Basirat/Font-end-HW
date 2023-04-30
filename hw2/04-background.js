@@ -17,19 +17,27 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const toggleColorChange = () => {
+    let buttonText = "";
+    let classToRemove = "";
+    let classToAdd = "";
+
     if (isRunning) {
+      buttonText = "Start";
+      classToRemove = "btn-danger";
+      classToAdd = "btn-primary";
       clearInterval(intervalId);
-      startStopButton.textContent = "Start";
-      startStopButton.classList.remove("btn-danger");
-      startStopButton.classList.add("btn-primary");
     } else {
+      buttonText = "Stop";
+      classToRemove = "btn-primary";
+      classToAdd = "btn-danger";
       const interval = parseInt(intervalInput.value.trim(), 10) || 3;
       intervalId = setInterval(changeBackgroundColor, interval * 1000);
-      startStopButton.textContent = "Stop";
-      startStopButton.classList.remove("btn-primary");
-      startStopButton.classList.add("btn-danger");
     }
+
     isRunning = !isRunning;
+    startStopButton.textContent = buttonText;
+    startStopButton.classList.remove(classToRemove);
+    startStopButton.classList.add(classToAdd);
   };
 
   startStopButton.addEventListener("click", toggleColorChange);

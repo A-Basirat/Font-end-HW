@@ -97,48 +97,74 @@ const Houses = () => {
   if (!chartData) return <div>Loading...</div>;
 
   const renderLegend = () => {
-    return chartData.labels.map((house, index) => {
-      return (
-        <div
-          key={index}
-          style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}
-        >
-          <div
-            style={{
-              width: "20px",
-              height: "20px",
-              backgroundColor: chartData.datasets[0].backgroundColor[index],
-              marginRight: "10px",
-            }}
-          ></div>
-          <div>{house}</div>
-        </div>
-      );
-    });
+    return (
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+          gap: "10px",
+          marginTop: "20px",
+        }}
+      >
+        {chartData.labels.map((house, index) => {
+          return (
+            <div
+              key={index}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "5px",
+              }}
+            >
+              <div
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  backgroundColor: chartData.datasets[0].backgroundColor[index],
+                  marginRight: "10px",
+                }}
+              ></div>
+              <div>{house}</div>
+            </div>
+          );
+        })}
+      </div>
+    );
   };
 
   return (
     <div>
       <div
         style={{
-          width: "600px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
           height: "600px",
           position: "relative",
           margin: "30px",
         }}
       >
-        <Doughnut
-          data={chartData}
-          options={{
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: {
-              display: false,
-            },
+        <div
+          style={{
+            width: "600px",
+            height: "600px",
+            position: "relative",
           }}
-        />
+        >
+          <Doughnut
+            data={chartData}
+            options={{
+              responsive: true,
+              maintainAspectRatio: false,
+              legend: {
+                display: false,
+              },
+            }}
+          />
+        </div>
       </div>
-      <div>{renderLegend()}</div>
+      {renderLegend()}
     </div>
   );
 };

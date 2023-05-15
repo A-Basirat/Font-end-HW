@@ -37,7 +37,9 @@ const Search = () => {
     setError(null);
 
     const filteredCharacters = allCharacters.filter((character) =>
-      character.title.toLowerCase().includes(searchTerm.toLowerCase())
+      (character.firstName + " " + character.lastName)
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase())
     );
 
     if (filteredCharacters.length === 0) {
@@ -52,11 +54,15 @@ const Search = () => {
   return (
     <div className="search-container">
       <h1 className="search-heading">Search for a character</h1>
+      <label htmlFor="search-input" className="visually-hidden">
+        Enter character name
+      </label>
       <input
+        id="search-input"
         type="text"
         value={searchTerm}
         onChange={handleSearchInputChange}
-        placeholder="Enter character name"
+        placeholder="Enter character full name"
         className="search-input"
       />
       <button onClick={handleSearchSubmit} className="search-button">
@@ -68,7 +74,7 @@ const Search = () => {
           <div key={character.id} className="character">
             <img
               src={character.imageUrl}
-              alt={`${character.firstName} ${character.lastName}`}
+              alt={`Image of ${character.firstName} ${character.lastName}`}
               className="character-img"
             />
             <h2 className="character-name">

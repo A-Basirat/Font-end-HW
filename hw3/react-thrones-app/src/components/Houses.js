@@ -40,6 +40,8 @@ const countHouseMembers = (characters) => {
 
   characters.forEach((character) => {
     let house = character.family.toLowerCase();
+
+    house = house.replace("house ", "");
     if (houseCounts[house]) {
       houseCounts[house]++;
     } else {

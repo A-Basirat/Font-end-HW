@@ -30,10 +30,10 @@ section {
 .character {
   display: inline-block;
   text-align: center;
-  margin: 0.5rem;
+  margin: 0.25rem;
   padding: 0.5rem;
   transition: background-color 0.3s;
-  width: 180px;
+  width: 45%;
 }
 
 .character:hover {
@@ -62,4 +62,10 @@ section {
 .character-title {
   font-size: small;
   font-weight: bold;
+}
+
+@media screen and (min-width: 768px) {
+  .character {
+    width: 180px;
+  }
 }
